@@ -4,9 +4,13 @@
 
 A harness turns task observations into useful features, constructs Jev questions and criteria, and combines the structured answers into actions. The authoring LLM can change the code, questions, graph, and memory. Once the harness is fixed, execution uses that code and its Jev calls; it does not need the authoring LLM on every decision.
 
-[Explore the live demo](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#comparison) · [Build a task](docs/task-authoring.md) · [Actual Jev call](docs/jev-example.md) · [Install the agent skill](skills/jev-harness/SKILL.md)
+**Pokémon result: after 5 reflection rounds, the selected harness improved Eval win rate from 25% (3/12) to 75% (9/12).** The search retained the round-3 candidate as its best harness; Eval was used for selection.
 
-![Archived Pokémon battle with the matching Jev decision and probabilities](docs/screenshots/pokemon-demo.png)
+[Open the interactive demo](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) · [How it works](#how-it-works) · [Install and use the skill](#build-your-own-task)
+
+[![Side-by-side replay: initial harness versus the selected evolved harness](docs/media/pokemon-comparison.gif)](docs/media/pokemon-comparison.mp4)
+
+**Initial vs. evolved:** the two harnesses play the same evaluation scenario. The initial harness loses; the selected harness wins. **Edited highlights: turn-2 decisions, then each battle’s ending.** [Watch the MP4](docs/media/pokemon-comparison.mp4) or [open the full battle archive](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) and expand the comparison.
 
 ## Start with the example
 
@@ -21,38 +25,7 @@ node website/preview.mjs --port 8768
 
 Open [localhost:8768](http://localhost:8768). The viewer needs Node.js and a modern browser; battle animations download assets from the official Pokémon Showdown renderer. The archived battle log stays in the browser and is not uploaded to a replay server. See [website setup](website/README.md) for deployment and archive verification.
 
-The featured harness improved from **3/12 to 9/12 wins on the same Eval set** during one recorded search. Eval was used for selection. This is an example result, not an independent estimate of performance on unseen games. The page shows Train/Eval only, distinguishes sampled training coverage, and includes rejected proposals.
-
-## Make a real Jev call
-
-Install the Python framework:
-
-```bash
-uv sync --locked --extra dev
-```
-
-This snippet sends the **exact state and questions from turn 12** of the featured game. Set `AI_GATEWAY_API_KEY` in your environment first. It makes a new request, so the response can differ from the archive.
-
-```python
-import json
-from pathlib import Path
-from auto_jev.providers import JevClient
-
-record = json.loads(Path("docs/examples/pokemon-turn12-jev.json").read_text())
-client = JevClient(transport="vercel")
-response = client.judge(**record["request"])
-print(response["answers"]["action"])
-```
-
-The recorded answer selected `switch:2` (Scizor) with probability `0.72`; the final code accepted that choice. These are action-choice probabilities, not battle win probabilities.
-
-To inspect the recorded answer without credentials or a request:
-
-```bash
-python3 docs/examples/jev_call.py
-```
-
-Use `uv run python docs/examples/jev_call.py --live` to explicitly send it again. [The example](docs/jev-example.md) includes the original instructions, criteria, full state, normalized answer, timing, and provenance. The [selected pipeline JSON](examples/pokemon/sample/selected-pipeline.json) contains all four execution nodes and their complete source.
+The reported improvement is an example result on the selection Eval set, not an independent estimate of performance on unseen games. The page shows Train/Eval only, distinguishes sampled training coverage, and includes rejected proposals.
 
 ## How it works
 
@@ -75,21 +48,104 @@ The task adapter owns observations, legal actions, side effects, and scoring. Th
 - **Keep the whole trace.** Reflection includes each selected episode's complete decisions, observations, node inputs and outputs, Jev questions and answers, memory, and failures. Lossless deduplication reduces repetition; an input that exceeds the configured byte cap is archived and rejected without truncation.
 - **Freeze the selected harness.** Frozen artifacts bind the specification, runtime, evaluator, and declared task resources. They still need Jev if they contain Jev nodes. A hosted model alias does not pin future provider behavior; stored responses and fresh calls have different reproducibility guarantees.
 
+The harness writes the Jev input: a task-specific `state`, named `questions`, their answer `type`, and the `instructions` and `criteria` used to judge the available actions. Here is a **recorded turn-12 request and answer**, with the state and response metadata shortened for readability. Every displayed value is unchanged; the [complete JSON](docs/examples/pokemon-turn12-jev.json) includes the full state, answer, timing, and provenance.
+
+```json
+{
+  "request": {
+    "model": "typesafe-ai/jev",
+    "state": {
+      "position": {
+        "turn": 12,
+        "our_active": {
+          "species": "Slowbro",
+          "hp_percent": 54
+        },
+        "opponent_active": {
+          "species": "Gastrodon",
+          "hp_percent": 69
+        },
+        "race": {
+          "our_best_move": "Psychic",
+          "turns_we_need_for_the_knockout": 3,
+          "turns_they_need_to_knock_us_out": 1
+        }
+      }
+    },
+    "questions": {
+      "action": {
+        "type": "choice",
+        "instructions": "Choose the single action most likely to win the whole battle, not only this turn. Every option lists calculator estimates from public species data: type effectiveness, the share of the target remaining HP a hit removes, how many turns each side needs to knock the other out, and the damage a switch in is predicted to take. Damage numbers that mention an unrevealed move are speculation about coverage the opponent may or may not carry, so treat them as risk, not fact. Take a stated knockout when it is available, do not send a Pokemon into a hit that knocks it out on entry, keep a healthy answer for the opponent remaining team, prefer attacking when our active already wins the damage race, and remember that switching hands the opponent a free attack. Answer with exactly one of the listed action IDs.",
+        "criteria": {
+          "switch:2": "switch to Scizor (100 percent HP, Bug/Steel): the hit it is predicted to take is about 68 percent of its HP; it then deals about 67 percent per turn with X-Scissor, needing 2 turns while the opponent needs 2, and it outspeeds; switching concedes one free attack",
+          "move:2": "Psychic (Psychic special, 90 BP, x1 neutral, accuracy 100 percent): about 41 percent of the target remaining HP, roughly 3 such hits to knock it out",
+          "move:3": "Ice Beam (Ice special, 90 BP, x1 neutral, accuracy 100 percent): about 27 percent of the target remaining HP, roughly 4 such hits to knock it out",
+          "move:4": "Slack Off (Normal status, 0 BP, x1 neutral, accuracy 100 percent): recovery, we sit at 54 percent HP and the predicted incoming hit is 110 percent of current HP"
+        }
+      }
+    }
+  },
+  "response": {
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "switch:2",
+        "probabilities": {
+          "move:3": 0.02,
+          "move:4": 0.02,
+          "move:2": 0.24,
+          "switch:2": 0.72
+        },
+        "confidence": 0.64
+      }
+    }
+  }
+}
+```
+
+Here, the harness estimates that Slowbro loses the damage race and offers a switch to Scizor among four legal actions. Jev returns `switch:2` with probability `0.72`, and the harness accepts that choice. These are **action-choice probabilities**, not the probability of winning the battle. The [selected pipeline](examples/pokemon/sample/selected-pipeline.json) shows how feature computation, parallel Jev questions, and final decision logic fit together.
+
 ![Candidate ancestry and the selected harness's code and Jev feature groups](docs/screenshots/pokemon-evolution.png)
 
 ## Build your own task
 
-Start with the [task authoring guide](docs/task-authoring.md) or install the [JevHarness agent skill](skills/jev-harness/SKILL.md):
+Install the [JevHarness skill](skills/jev-harness/SKILL.md) and describe your task to Codex or Claude Code. You do not need to handwrite Jev instructions or criteria.
+
+Clone the repository, then install the skill into the project where you want to work (replace `/path/to/your-project` with an existing directory):
 
 ```bash
-python3 scripts/install-skill.py --target both --scope project
+git clone https://github.com/TianyuCodings/JevHarness.git
+cd JevHarness
+python3 scripts/install-skill.py --target both --scope project --project /path/to/your-project
 ```
 
-This installs the skill into `.agents/skills/jev-harness` for Codex and `.claude/skills/jev-harness` for Claude Code. Use `--scope user` to install for your other projects, or `--target codex` / `--target claude` to select one agent. Existing different skills are never overwritten. See the [installation guide](skills/jev-harness/references/installation.md).
+This installs the complete skill in `.agents/skills/jev-harness/` for Codex and `.claude/skills/jev-harness/` for Claude Code. Use `--target codex` or `--target claude` if you only use one. To make the skill available across your projects instead, run:
 
-Invoke `$jev-harness` in Codex or `/jev-harness` in Claude Code. The skill first asks for enough information about your task, observations, legal actions, examples, success criteria, environment, and experiment resources. It then writes the harness; you do not need to handwrite Jev instructions or criteria. If trustworthy reward feedback is available, ask it to add evaluation and reflection optimization.
+```bash
+python3 scripts/install-skill.py --target both --scope user
+```
 
-The reusable interfaces are Python APIs: `PipelineRuntime`, `JevClient`, `run_evolution`, `build_task_contract`, `freeze_run`, and `evaluate_frozen`. The existing `auto-jev` CLI remains oriented toward the earlier trading example; it is not a generic task loader. Pokémon has its own [runner and setup](examples/pokemon/README.md).
+The personal locations are `~/.agents/skills/jev-harness/` and `~/.claude/skills/jev-harness/`. Restart your agent session if the skill does not appear. The installer refuses to overwrite a different existing installation; see the [installation guide](skills/jev-harness/references/installation.md) for details.
+
+In **Codex**, invoke the skill with `$jev-harness`:
+
+```text
+$jev-harness Build a harness that routes support tickets to the right team.
+The JevHarness checkout is at /absolute/path/JevHarness.
+First clarify my inputs, legal actions, examples, success criteria, and budget.
+If we have reliable rewards, add evaluation and reflection optimization.
+```
+
+In **Claude Code**, use `/jev-harness` followed by the same task description:
+
+```text
+/jev-harness Build a harness that routes support tickets to the right team.
+The JevHarness checkout is at /absolute/path/JevHarness.
+First clarify my inputs, legal actions, examples, success criteria, and budget.
+If we have reliable rewards, add evaluation and reflection optimization.
+```
+
+The skill first gathers sufficient information about the task, allowed observations and actions, available data, reward or evaluation method, runtime, credentials, and experiment resources. It then helps the agent build and validate the harness. When you request optimization and reliable feedback is available, it uses the execution trajectories and rewards for reflection, then freezes the selected harness for reuse.
 
 ## Runtime and credentials
 
@@ -111,7 +167,7 @@ The package and imports retain the names `auto-jev` and `auto_jev`. Provider ada
 | [`auto_jev/`](auto_jev/) | Specification validation, parallel runtime, Jev transports, reflection, GEPA, storage, and freezing |
 | [`examples/pokemon/`](examples/pokemon/) | Trusted battle adapter, seeded local engine bridge, harnesses, and interactive presentation |
 | [`examples/pokemon/sample/`](examples/pokemon/sample/) | Selected harness and the curated website archive, with provenance |
-| [`docs/`](docs/) | Task authoring, an actual Jev call, and website screenshots |
+| [`docs/`](docs/) | Task authoring, a recorded Jev call, comparison video, and website screenshots |
 | [`skills/jev-harness/`](skills/jev-harness/) | Instructions for a coding agent authoring a task-specific harness |
 | [`website/`](website/) | Read-only demonstration and its deployment adapter |
 
