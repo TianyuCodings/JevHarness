@@ -1,0 +1,7 @@
+{
+  "kind": "openai",
+  "api_key_env": "OPENAI_DIRECT_API_KEY",
+  "model": "gpt-5",
+  "max_tokens": 4096,
+  "timeout": 60
+}

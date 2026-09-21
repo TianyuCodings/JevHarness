@@ -1,0 +1,9 @@
+{
+  "kind": "azure",
+  "api_key_env": "OPENAI_API_KEY",
+  "azure_endpoint": "https://aidp.bytedance.net/api/modelhub/online/v2/crawl",
+  "api_version": "2024-02-01",
+  "model": "openai/gpt-5",
+  "max_tokens": 4096,
+  "timeout": 30
+}

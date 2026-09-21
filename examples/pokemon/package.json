@@ -1,0 +1,9 @@
+{
+  "name": "auto-jev-pokemon-example",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local official Pokemon Showdown engine for Auto_Jev strategy evolution",
+  "dependencies": {
+    "pokemon-showdown": "0.11.11"
+  }
+}

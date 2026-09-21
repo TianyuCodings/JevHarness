@@ -1,0 +1,201 @@
+{
+  "schema": "auto_jev.pokemon.showcase.v1",
+  "run_id": "20260921-012437-pokemon-mixed-expanded-405d85",
+  "candidate_hash": "0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502",
+  "episode_id": "pokemon-expanded-validation-05",
+  "split": "validation",
+  "trace_revision": "9f52d96ac9717dca7a399de9ed4cc6f37018ef4c09bc01dcad5c8d9c459fb3ac",
+  "archived_result": {
+    "winner": "player",
+    "score": 1,
+    "turns": 15
+  },
+  "source": {
+    "game_path": "/api/run/20260921-012437-pokemon-mixed-expanded-405d85/game/0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502/pokemon-expanded-validation-05?split=validation",
+    "replay_path": "/api/run/20260921-012437-pokemon-mixed-expanded-405d85/game/0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502/pokemon-expanded-validation-05/replay?split=validation",
+    "public_replay_log_sha256": "ee0e100f0a4c7604773e526152f492533a4ce54c798eed8583c0e366ab11f26d",
+    "renderer_origin": "https://play.pokemonshowdown.com",
+    "renderer_entrypoint": "https://play.pokemonshowdown.com/js/replay-embed.js"
+  },
+  "capture": {
+    "method": "Playwright locator screenshot of the official renderer battle element",
+    "selector": ".battle",
+    "viewport_css_pixels": {
+      "width": 900,
+      "height": 750
+    },
+    "device_scale_factor": 2,
+    "seek_method": "Official Replays.battle.seekTurn; paused and muted",
+    "post_processing": "none; no crop, resize, editing or image generation after capture",
+    "battle_log_uploaded": false,
+    "new_games_or_model_requests": false
+  },
+  "images": [
+    {
+      "file": "0617b0bb-game05-turn02-before.png",
+      "stage": "before_action",
+      "turn": 2,
+      "caption": "Turn 2, before the action: Dragonite at 32% HP faces Tyranitar at 58% in sandstorm.",
+      "sha256": "ee36d47745ae3000d299ae7e3a789c84ccac0ca2160a3a9303d62da360e1a01b",
+      "bytes": 1010550,
+      "width": 1284,
+      "height": 726,
+      "seek_turn": 2,
+      "captured_at": "2026-09-21T07:30:19.106689+00:00",
+      "rendered_public_state": {
+        "turn": 2,
+        "ended": false,
+        "visible_text": "\nSandstorm (4 or 7 turns)\nDragonite L50\n32%\nTyranitar L50\n58%\nAutoJev\nOpponent\nTurn 2",
+        "loaded_sprite_count": 2
+      }
+    },
+    {
+      "file": "0617b0bb-game05-turn03-after-earthquake.png",
+      "stage": "after_action",
+      "turn": 3,
+      "caption": "After turn 2: the opponent switched to Magnezone. Earthquake activated Sturdy; Sitrus Berry restored it to 26% HP. The screenshot shows the start of turn 3.",
+      "sha256": "dc38cd9bbfa6cee7b1caa755f271788580bc350321dedf168f9fbb3f69a2c965",
+      "bytes": 1006009,
+      "width": 1284,
+      "height": 726,
+      "seek_turn": 3,
+      "captured_at": "2026-09-21T07:30:20.590697+00:00",
+      "rendered_public_state": {
+        "turn": 3,
+        "ended": false,
+        "visible_text": "\nSandstorm (3 or 6 turns)\nDragonite L50\n26%\nMagnezone L50\n26%\nAutoJev\nOpponent\nTurn 3",
+        "loaded_sprite_count": 2
+      }
+    },
+    {
+      "file": "0617b0bb-game05-turn15-win.png",
+      "stage": "final_win",
+      "turn": 15,
+      "caption": "Final result of this archived game: AutoJev wins on turn 15.",
+      "sha256": "40695fa9d10c5b53b5c4393fae56017354cab719f66dd745a1e02355a3653c72",
+      "bytes": 1018380,
+      "width": 1284,
+      "height": 726,
+      "seek_turn": "end",
+      "captured_at": "2026-09-21T07:30:22.069912+00:00",
+      "rendered_public_state": {
+        "turn": 15,
+        "ended": true,
+        "visible_text": "\nSandstorm (4 or 7 turns)\nScizor L50\n59%\nAutoJev\nOpponent\nTurn 15",
+        "loaded_sprite_count": 1
+      }
+    }
+  ],
+  "renderer_code_assets": [
+    {
+      "url": "https://play.pokemonshowdown.com/config/config.js?a7",
+      "sha256": "456d19902d0dc372aa47c608147ba3a2dc5676b2c11ffdd246079ad22f793f75",
+      "bytes": 12498
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/abilities.js?a7",
+      "sha256": "05b8a07fce73761d3d4f5149ef6d8743e7504e3b255e51051392a9b004446c6b",
+      "bytes": 108212
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/graphics.js?a7",
+      "sha256": "a4a3248a49e77d17904466d54a99a94a0ca390d08244c6ce8bef4ee223800528",
+      "bytes": 721049
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/items.js?a7",
+      "sha256": "efdf807f9284fc7518d461bed647a3749dea27f88c224c6d79f7f2746ad63665",
+      "bytes": 155851
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/moves.js?a7",
+      "sha256": "f258692c94170a35e33342e7f8b54b91c189ddc871027452ae287e6d1295e70b",
+      "bytes": 451602
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/pokedex-mini-bw.js?a7",
+      "sha256": "41b951a54eb8cd9fd3fad42610c9405ab80c33aacab90abc8601d63737586e4a",
+      "bytes": 79515
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/pokedex-mini.js?a7",
+      "sha256": "108fd89933128e0384fea0c57d61bfec3ce233716f4b491120eb420d9ee9feeb",
+      "bytes": 93202
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/pokedex.js?a7",
+      "sha256": "40c646a1900d655bd7ffee500e33e6df0af095539dd4907458463bf6691ce04c",
+      "bytes": 460314
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/data/teambuilder-tables.js?a7",
+      "sha256": "eaebe0ada608e301ed6b4d4520f0e71a889ef65a6558fae3586644903773af37",
+      "bytes": 15830453
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/battle-sound.js",
+      "sha256": "3eac48222a21b463b25419bb0f77de57656dc9f40707d9bdbf06d04538e074ee",
+      "bytes": 4341
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/battle-tooltips.js?a7",
+      "sha256": "60617be67f2dbde12e417c7d8aa0f167dc2ae1f923ec69b20e8689ebc7670e74",
+      "bytes": 119059
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/battle.js?a7",
+      "sha256": "45c661538c34e03ce4dd856ac78b1f053d347a07b58f752ea5ed303fa2a105f3",
+      "bytes": 104727
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/battledata.js?a7",
+      "sha256": "b0992c6e8c5d8ec46b8539415961102d439dc8161a9e436cd58758f4a8a3c8d8",
+      "bytes": 1134787
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/lib/html-sanitizer-minified.js",
+      "sha256": "618196efc83d034f173dd558fe0c53008717fd5d8752dfe230675175ab0a4998",
+      "bytes": 17331
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/lib/jquery-1.11.0.min.js",
+      "sha256": "b294e973896f8f874e90a8eb1a8908ac790980d034c4c4bdf0fc3d37b8abf682",
+      "bytes": 96381
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/lib/ps-polyfill.js",
+      "sha256": "ac62ecd186432c2c316153f7b3dcfffc4037ae70987f2454da2eebedbf145e01",
+      "bytes": 8581
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/js/replay-embed.js",
+      "sha256": "654d71ebb1c9599482e17453bfa67d29c1797dd46ae4bed68bf3bc33192e42b5",
+      "bytes": 7910
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/style/battle-log.css?v15.1",
+      "sha256": "d50c093fde76832d8bdce6f2f73df33761218f4b38ce759d470d7c9861f3cc8d",
+      "bytes": 27781
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/style/battle.css?a7",
+      "sha256": "546bb1c26fd3f4d22287749c3fc09dc45cf6aa51a6397a791a05752d3ec2bbe5",
+      "bytes": 16869
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/style/font-awesome.css?",
+      "sha256": "bc7f7ece9a95e2cead79c5253af1ec87c142544c7da0a69e3afae3e67fc3ca82",
+      "bytes": 37396
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/style/replay.css?a7",
+      "sha256": "3ce93dd4121288cc3da86345faacb5db59dc23963b111f300e5990e59b993c33",
+      "bytes": 3459
+    },
+    {
+      "url": "https://play.pokemonshowdown.com/style/utilichart.css?a7",
+      "sha256": "f0e9605f711abbf49b12d2d7810f9f28f801f20b723107c565da96bb49faa8a1",
+      "bytes": 6870
+    }
+  ]
+}

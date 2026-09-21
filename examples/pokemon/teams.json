@@ -1,0 +1,40 @@
+{
+  "schema": "auto_jev.pokemon.teams.v1",
+  "format": "gen9customgame@@@!! Max Team Size = 3,Min Team Size = 3,Terastal Clause",
+  "task_rules": {
+    "format_kind": "custom 3v3 singles pilot; not an official competitive ladder format",
+    "team_preview": "fixed exported order and lead; team selection is not evolved",
+    "terastallization": "disabled by Terastal Clause",
+    "engine_debug": false,
+    "opponent_hp": "public percentage; no debug exact-HP output",
+    "team_validation": "each exported team is checked by Showdown TeamValidator for this custom format"
+  },
+  "teams": [
+    {
+      "id": "balanced",
+      "label": "Fire-Water-Ground Balance",
+      "team": "Charizard @ Sitrus Berry\nAbility: Blaze\nLevel: 50\nEVs: 252 SpA / 4 SpD / 252 Spe\nTimid Nature\n- Flamethrower\n- Air Slash\n- Dragon Pulse\n- Roost\n\nRotom-Wash @ Leftovers\nAbility: Levitate\nLevel: 50\nEVs: 252 HP / 252 Def / 4 SpA\nBold Nature\n- Hydro Pump\n- Thunderbolt\n- Will-O-Wisp\n- Volt Switch\n\nGarchomp @ Sitrus Berry\nAbility: Rough Skin\nLevel: 50\nEVs: 252 Atk / 4 SpD / 252 Spe\nJolly Nature\n- Earthquake\n- Dragon Claw\n- Rock Slide\n- Swords Dance\n"
+    },
+    {
+      "id": "tempo",
+      "label": "Dragon-Steel-Psychic Tempo",
+      "team": "Dragonite @ Lum Berry\nAbility: Multiscale\nLevel: 50\nEVs: 252 Atk / 4 SpD / 252 Spe\nAdamant Nature\n- Dragon Claw\n- Extreme Speed\n- Earthquake\n- Dragon Dance\n\nScizor @ Sitrus Berry\nAbility: Technician\nLevel: 50\nEVs: 252 HP / 252 Atk / 4 SpD\nAdamant Nature\n- Bullet Punch\n- X-Scissor\n- U-turn\n- Swords Dance\n\nSlowbro @ Leftovers\nAbility: Regenerator\nLevel: 50\nEVs: 252 HP / 252 Def / 4 SpA\nBold Nature\n- Surf\n- Psychic\n- Ice Beam\n- Slack Off\n"
+    },
+    {
+      "id": "resilient",
+      "label": "Grass-Fire-Steel Recovery",
+      "team": "Venusaur @ Black Sludge\nAbility: Overgrow\nLevel: 50\nEVs: 252 HP / 252 SpA / 4 SpD\nModest Nature\n- Giga Drain\n- Sludge Bomb\n- Earth Power\n- Synthesis\n\nArcanine @ Sitrus Berry\nAbility: Intimidate\nLevel: 50\nEVs: 252 Atk / 4 SpD / 252 Spe\nAdamant Nature\n- Flare Blitz\n- Extreme Speed\n- Wild Charge\n- Morning Sun\n\nCorviknight @ Leftovers\nAbility: Pressure\nLevel: 50\nEVs: 252 HP / 252 Def / 4 SpD\nImpish Nature\n- Brave Bird\n- Iron Head\n- Roost\n- Body Press\n"
+    },
+    {
+      "id": "sand",
+      "label": "Sandstorm-Water-Ground Control",
+      "team": "Tyranitar @ Sitrus Berry\nAbility: Sand Stream\nLevel: 50\nEVs: 252 HP / 252 Atk / 4 SpD\nAdamant Nature\n- Stone Edge\n- Crunch\n- Earthquake\n- Dragon Dance\n\nGastrodon @ Leftovers\nAbility: Storm Drain\nLevel: 50\nEVs: 252 HP / 4 Def / 252 SpD\nCalm Nature\n- Earth Power\n- Muddy Water\n- Ice Beam\n- Recover\n\nMagnezone @ Sitrus Berry\nAbility: Sturdy\nLevel: 50\nEVs: 252 HP / 252 SpA / 4 SpD\nModest Nature\n- Thunderbolt\n- Flash Cannon\n- Volt Switch\n- Thunder Wave\n"
+    }
+  ],
+  "matchups": [
+    {"id": "balanced-v-tempo", "player_team": "balanced", "opponent_team": "tempo"},
+    {"id": "tempo-v-resilient", "player_team": "tempo", "opponent_team": "resilient"},
+    {"id": "resilient-v-balanced", "player_team": "resilient", "opponent_team": "balanced"},
+    {"id": "sand-v-tempo", "player_team": "sand", "opponent_team": "tempo"}
+  ]
+}

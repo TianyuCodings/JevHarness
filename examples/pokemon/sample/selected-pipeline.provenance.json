@@ -1,0 +1,16 @@
+{
+  "schema": "jev-harness.pipeline-provenance.v1",
+  "run_id": "20260921-012437-pokemon-mixed-expanded-405d85",
+  "candidate_hash": "0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502",
+  "source_file": "runs/20260921-012437-pokemon-mixed-expanded-405d85/candidates.json",
+  "source_file_sha256": "141132d554a7f1e105036603feeda8f26d18217419bdd868b8e39cf78d06bc31",
+  "source_json_pointer": "/0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502/spec",
+  "spec_hash_method": "auto_jev.spec.spec_hash: validate, then sorted compact UTF-8 JSON",
+  "export_file": "selected-pipeline.json",
+  "export_file_sha256": "9202ea3c168301e586c19d62404e94ff8f0ba271751165867da31fbebe704cda",
+  "evaluated_runtime_source_hash": "304739c5249bfb9bc9c98e553ffe4bc6ffca467efa7205081332853e1207f441",
+  "note": "The PipelineSpec is copied unchanged. This inspectable source artifact is not a portable frozen runtime or an evolution checkpoint.",
+  "parents": [
+    "8751159544960a76d06a0bcbd7cf26d4b781b9e30706fdc030c50e94b73822d8"
+  ]
+}

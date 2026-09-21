@@ -1,0 +1,8 @@
+{
+  "kind": "anthropic",
+  "api_key_env": "ANTHROPIC_API_KEY",
+  "model": "claude-fable-5-1",
+  "max_tokens": 4096,
+  "effort": "xhigh",
+  "timeout": 180
+}

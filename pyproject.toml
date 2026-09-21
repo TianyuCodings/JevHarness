@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "auto-jev"
+version = "0.1.0"
+description = "GEPA evolution of reusable Jev decision pipelines"
+requires-python = ">=3.11"
+dependencies = ["gepa==0.1.4", "httpx>=0.28,<0.29", "python-dotenv>=1.1,<2", "openai>=2,<4", "anthropic>=0.70,<2", "fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "playwright>=1.50,<2"]
+
+[project.scripts]
+auto-jev = "auto_jev.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["auto_jev*"]
+
+[tool.setuptools.package-data]
+auto_jev = ["static/*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

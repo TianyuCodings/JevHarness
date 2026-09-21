@@ -1,0 +1,24 @@
+.env
+.env.*
+!.env.example
+.venv/
+.work/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+runs/
+data/
+artifacts/
+.cache/
+dist/
+build/
+node_modules/
+.DS_Store
+*.log
+*.crash
+.sites-runtime/
+# Local research notes from the preceding trading experiments.
+/IMPLEMENTATION.md
+/REVIEW.md
+/SCALE_EXPERIMENT.md

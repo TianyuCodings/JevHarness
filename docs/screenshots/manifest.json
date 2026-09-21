@@ -1,0 +1,27 @@
+{
+  "schema": "jevharness.screenshots.v1",
+  "source": "Actual locally rendered published-demo interface; no generated images",
+  "run_id": "20260921-012437-pokemon-mixed-expanded-405d85",
+  "candidate_hash": "0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502",
+  "episode_id": "pokemon-expanded-validation-05",
+  "trace_revision": "9f52d96ac9717dca7a399de9ed4cc6f37018ef4c09bc01dcad5c8d9c459fb3ac",
+  "html_sha256": "68cfb348365771e3af10526c224da2fa8939299bc920e4dfa269998af0d7659e",
+  "images": [
+    {
+      "file": "pokemon-arguments.png",
+      "sha256": "5fffdb725c03c532f991463ed035fad803d8d19e3b6f74f7e27ade6b4ad7edf8"
+    },
+    {
+      "file": "pokemon-demo.png",
+      "sha256": "aaa6911c2c1b0b88b49edf95843ee345a54e5e23d30a716a28083570b8493d2d"
+    },
+    {
+      "file": "pokemon-evolution.png",
+      "sha256": "655ca57be0978afe451452904a103821409e1fd1218b3b87e53fbd88e2049415"
+    },
+    {
+      "file": "pokemon-victory.png",
+      "sha256": "416474c0b9acbd845e967f85c2d6deb785323931c51639f4926737407770db74"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "kind": "claude_cli",
+  "model": "claude-fable-5-1",
+  "effort": "xhigh",
+  "timeout": 600
+}

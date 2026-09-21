@@ -1,0 +1,4 @@
+interface:
+  display_name: "JevHarness"
+  short_description: "Build and evolve task-specific code and Jev flows"
+  default_prompt: "Use $jev-harness to clarify my task, build a code and Jev decision flow, and evaluate it before any optional evolution."

@@ -1,0 +1,242 @@
+{
+  "schema": "jev-harness.recorded-call.v1",
+  "provenance": {
+    "run_id": "20260921-012437-pokemon-mixed-expanded-405d85",
+    "candidate_hash": "0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502",
+    "episode_id": "pokemon-expanded-validation-05",
+    "split": "validation",
+    "turn": 12,
+    "request_id": 13,
+    "decision_index": 12,
+    "node_id": "pick",
+    "source_trace": "runs/20260921-012437-pokemon-mixed-expanded-405d85/traces/validation/0617b0bb9505cddfc319231e6b2226924e1b1d40280b09486ee16d838342a502__pokemon-expanded-validation-05.json",
+    "source_trace_sha256": "9f52d96ac9717dca7a399de9ed4cc6f37018ef4c09bc01dcad5c8d9c459fb3ac",
+    "source_trace_bytes": 3621150,
+    "node_json_pointer": "/traces/12/trace/2",
+    "node_json_sha256": "5570839a72720159a939d6cfe0104b84e5925b0c6af4f4c2a475b1d349c5b068",
+    "canonical_json": "UTF-8 JSON; ensure_ascii=False; sort_keys=True; separators=(comma,colon); allow_nan=False",
+    "request_json_sha256": "7d65d98963b089a395902634a1b44ebacbe9c309d4f56de598ad44b567e22e76",
+    "response_json_sha256": "acf5fac8a2e71f080f3e4fdff6ca530bec24fbfa083826bbaf6680820c160bb1",
+    "response_projection_fields": [
+      "answers",
+      "rounding",
+      "model",
+      "usage"
+    ],
+    "response_projection_note": "Complete normalized answers and reported model/usage/rounding copied unchanged. Local cache paths and gateway transport diagnostics are omitted; the source trace remains unchanged."
+  },
+  "request": {
+    "model": "typesafe-ai/jev",
+    "state": {
+      "position": {
+        "turn": 12,
+        "phase": "move",
+        "weather": null,
+        "our_active": {
+          "species": "Slowbro",
+          "hp_percent": 54,
+          "types": [
+            "Water",
+            "Psychic"
+          ],
+          "status": null,
+          "ability": "regenerator",
+          "item": "leftovers",
+          "boosts": {
+            "atk": 0,
+            "def": 0,
+            "spa": 0,
+            "spd": 0,
+            "spe": 0,
+            "accuracy": 0,
+            "evasion": 0
+          }
+        },
+        "opponent_active": {
+          "species": "Gastrodon",
+          "hp_percent": 69,
+          "types": [
+            "Water",
+            "Ground"
+          ],
+          "status": null,
+          "ability": "Storm Drain",
+          "item": "Leftovers",
+          "revealed_move_count": 4,
+          "unrevealed_move_slots": 0
+        },
+        "race": {
+          "moves_first": "the opponent active",
+          "our_best_damage_percent_per_turn": 41,
+          "our_best_move": "Psychic",
+          "turns_we_need_for_the_knockout": 3,
+          "their_damage_from_known_moves_percent": 110,
+          "their_risk_adjusted_damage_percent": 110,
+          "turns_they_need_to_knock_us_out": 1,
+          "worst_unrevealed_coverage_type": "electric",
+          "that_coverage_would_remove_percent": 139
+        },
+        "bench_options": [
+          "switch to Scizor (100 percent HP, Bug/Steel): the hit it is predicted to take is about 68 percent of its HP; it then deals about 67 percent per turn with X-Scissor, needing 2 turns while the opponent needs 2, and it outspeeds; switching concedes one free attack"
+        ],
+        "caveat": "All numbers are approximations from public species data. Opponent EVs, items, abilities and unrevealed moves stay unknown; coverage figures are hypothetical."
+      },
+      "our_team": [
+        {
+          "species": "Slowbro",
+          "hp_percent": 54,
+          "types": [
+            "Water",
+            "Psychic"
+          ],
+          "status": null,
+          "fainted": false,
+          "versus_current_foe": "deals about 41 percent per turn, takes about 110 percent per turn",
+          "versus_other_foes": [
+            "Tyranitar: unfavourable"
+          ]
+        },
+        {
+          "species": "Scizor",
+          "hp_percent": 100,
+          "types": [
+            "Bug",
+            "Steel"
+          ],
+          "status": null,
+          "fainted": false,
+          "versus_current_foe": "deals about 67 percent per turn, takes about 68 percent per turn",
+          "versus_other_foes": [
+            "Tyranitar: favourable"
+          ]
+        },
+        {
+          "species": "Dragonite",
+          "hp_percent": 0,
+          "types": [
+            "Dragon",
+            "Flying"
+          ],
+          "status": null,
+          "fainted": true
+        }
+      ],
+      "opponent_team": [
+        {
+          "species": "Tyranitar",
+          "types": [
+            "Rock",
+            "Dark"
+          ],
+          "hp_percent": 58,
+          "fainted": false,
+          "revealed_moves": [
+            "Stone Edge"
+          ]
+        },
+        {
+          "species": "Gastrodon",
+          "types": [
+            "Water",
+            "Ground"
+          ],
+          "hp_percent": 69,
+          "fainted": false,
+          "revealed_moves": [
+            "Recover",
+            "Muddy Water",
+            "Ice Beam",
+            "Earth Power"
+          ]
+        },
+        {
+          "species": "Magnezone",
+          "types": [
+            "Electric",
+            "Steel"
+          ],
+          "hp_percent": 0,
+          "fainted": true,
+          "revealed_moves": []
+        }
+      ],
+      "recent_log": [
+        "|-heal|p2a: Gastrodon|71/100|[from] item: Leftovers",
+        "|-heal|p1a: Slowbro|180/202|[from] item: Leftovers",
+        "|upkeep",
+        "|turn|10",
+        "|",
+        "|move|p2a: Gastrodon|Recover|p2a: Gastrodon",
+        "|-heal|p2a: Gastrodon|100/100",
+        "|move|p1a: Slowbro|Psychic|p2a: Gastrodon",
+        "|-damage|p2a: Gastrodon|78/100",
+        "|",
+        "|-heal|p2a: Gastrodon|84/100|[from] item: Leftovers",
+        "|-heal|p1a: Slowbro|192/202|[from] item: Leftovers",
+        "|upkeep",
+        "|turn|11",
+        "|",
+        "|move|p2a: Gastrodon|Earth Power|p1a: Slowbro",
+        "|-damage|p1a: Slowbro|98/202",
+        "|move|p1a: Slowbro|Psychic|p2a: Gastrodon",
+        "|-damage|p2a: Gastrodon|63/100",
+        "|",
+        "|-heal|p2a: Gastrodon|69/100|[from] item: Leftovers",
+        "|-heal|p1a: Slowbro|110/202|[from] item: Leftovers",
+        "|upkeep",
+        "|turn|12"
+      ]
+    },
+    "questions": {
+      "action": {
+        "type": "choice",
+        "instructions": "Choose the single action most likely to win the whole battle, not only this turn. Every option lists calculator estimates from public species data: type effectiveness, the share of the target remaining HP a hit removes, how many turns each side needs to knock the other out, and the damage a switch in is predicted to take. Damage numbers that mention an unrevealed move are speculation about coverage the opponent may or may not carry, so treat them as risk, not fact. Take a stated knockout when it is available, do not send a Pokemon into a hit that knocks it out on entry, keep a healthy answer for the opponent remaining team, prefer attacking when our active already wins the damage race, and remember that switching hands the opponent a free attack. Answer with exactly one of the listed action IDs.",
+        "criteria": {
+          "switch:2": "switch to Scizor (100 percent HP, Bug/Steel): the hit it is predicted to take is about 68 percent of its HP; it then deals about 67 percent per turn with X-Scissor, needing 2 turns while the opponent needs 2, and it outspeeds; switching concedes one free attack",
+          "move:2": "Psychic (Psychic special, 90 BP, x1 neutral, accuracy 100 percent): about 41 percent of the target remaining HP, roughly 3 such hits to knock it out",
+          "move:3": "Ice Beam (Ice special, 90 BP, x1 neutral, accuracy 100 percent): about 27 percent of the target remaining HP, roughly 4 such hits to knock it out",
+          "move:4": "Slack Off (Normal status, 0 BP, x1 neutral, accuracy 100 percent): recovery, we sit at 54 percent HP and the predicted incoming hit is 110 percent of current HP"
+        }
+      }
+    }
+  },
+  "response": {
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "switch:2",
+        "probabilities": {
+          "move:3": 0.02,
+          "move:4": 0.02,
+          "move:2": 0.24,
+          "switch:2": 0.72
+        },
+        "confidence": 0.64
+      }
+    },
+    "rounding": {
+      "probabilityDecimals": 2,
+      "scoreDecimals": 2
+    },
+    "model": "typesafe-ai/jev",
+    "usage": {
+      "inputTokens": 2044,
+      "outputTokens": 55
+    }
+  },
+  "recording": {
+    "transport": "vercel",
+    "request_hash": "93e9647bc1c9d4418681e774a938dcb4818ceb74d00d44106632c53c930a72cf",
+    "cache_hit": false,
+    "request_elapsed_ms": 258.78375000320375,
+    "model_version_pinned": false
+  },
+  "outcome": {
+    "executed_action_id": "switch:2",
+    "flow_used_jev_pick": true,
+    "public_next_event": "|switch|p1a: Scizor|Scizor, L50|100/100",
+    "game_winner": "player",
+    "game_score": 1,
+    "game_turns": 15
+  }
+}

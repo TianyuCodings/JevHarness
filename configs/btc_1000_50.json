@@ -1,0 +1,24 @@
+{
+ "name": "btc-1000-bars-50-rounds",
+ "assets": [
+  "BTC-USD"
+ ],
+ "interval_seconds": 3600,
+ "bars_per_split": 1000,
+ "train_batch_bars": 50,
+ "evolution_rounds": 50,
+ "train": "data/btc_1000/train_batches.json",
+ "validation": "data/btc_1000/validation.json",
+ "test": "data/btc_1000/test.json",
+ "seed_pipeline": "configs/flow_seed.json",
+ "proposer_config": "configs/claude_scale.json",
+ "jev_transport": "vercel",
+ "runs_dir": "runs",
+ "output_dir": "artifacts/btc_1000_50",
+ "seed": 0,
+ "costs": {
+  "initial_cash": 10000,
+  "fee_bps": 10,
+  "slippage_bps": 5
+ }
+}
