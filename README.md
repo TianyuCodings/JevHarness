@@ -133,7 +133,39 @@ Here, the harness estimates that Slowbro loses the damage race and offers a swit
 
 Install the [JevHarness skill](skills/jev-harness/SKILL.md) and describe your task to Codex or Claude Code. You do not need to handwrite Jev instructions or criteria.
 
-Clone the repository, then install the skill into the project where you want to work (replace `/path/to/your-project` with an existing directory):
+**Claude Code: install online as a plugin.** Run these commands inside Claude Code:
+
+```text
+/plugin marketplace add https://github.com/TianyuCodings/JevHarness.git
+/plugin install jev-harness@jevharness
+/reload-plugins
+```
+
+Then invoke the plugin's skill with your task:
+
+```text
+/jev-harness:jev-harness Build a harness that routes support tickets to the right team.
+First clarify my inputs, legal actions, examples, success criteria, and budget.
+If we have reliable rewards, add evaluation and reflection optimization.
+```
+
+`/plugin` opens Claude Code's plugin manager. The online installation downloads the skill and its references; no manual copying is needed. If this repository is private, your GitHub account needs read access and Git authentication must already work. Installing the plugin does not install Python dependencies or configure model keys.
+
+**Codex: install the skill from GitHub.** In a Codex host that provides the built-in `skill-installer`, send:
+
+```text
+$skill-installer Install the jev-harness skill from https://github.com/TianyuCodings/JevHarness/tree/main/skills/jev-harness
+```
+
+After installation, use the skill on your next turn; restart the session if it is not discovered:
+
+```text
+$jev-harness Build a harness that routes support tickets to the right team.
+First clarify my inputs, legal actions, examples, success criteria, and budget.
+If we have reliable rewards, add evaluation and reflection optimization.
+```
+
+**Manual installation fallback for either host.** Clone the repository, then install the skill into the project where you want to work (replace `/path/to/your-project` with an existing directory):
 
 ```bash
 git clone https://github.com/TianyuCodings/JevHarness.git
@@ -147,25 +179,7 @@ This installs the complete skill in `.agents/skills/jev-harness/` for Codex and 
 python3 scripts/install-skill.py --target both --scope user
 ```
 
-The personal locations are `~/.agents/skills/jev-harness/` and `~/.claude/skills/jev-harness/`. Restart your agent session if the skill does not appear. The installer refuses to overwrite a different existing installation; see the [installation guide](skills/jev-harness/references/installation.md) for details.
-
-In **Codex**, invoke the skill with `$jev-harness`:
-
-```text
-$jev-harness Build a harness that routes support tickets to the right team.
-The JevHarness checkout is at /absolute/path/JevHarness.
-First clarify my inputs, legal actions, examples, success criteria, and budget.
-If we have reliable rewards, add evaluation and reflection optimization.
-```
-
-In **Claude Code**, use `/jev-harness` followed by the same task description:
-
-```text
-/jev-harness Build a harness that routes support tickets to the right team.
-The JevHarness checkout is at /absolute/path/JevHarness.
-First clarify my inputs, legal actions, examples, success criteria, and budget.
-If we have reliable rewards, add evaluation and reflection optimization.
-```
+The personal locations are `~/.agents/skills/jev-harness/` and `~/.claude/skills/jev-harness/`. With this standalone installation, invoke `$jev-harness` in Codex or `/jev-harness` in Claude Code. The Claude plugin uses `/jev-harness:jev-harness` instead. Restart your agent session if the skill does not appear. The installer refuses to overwrite a different existing installation; see the [installation guide](skills/jev-harness/references/installation.md) for terminal commands, updates, and discovery details.
 
 The skill first gathers sufficient information about the task, allowed observations and actions, available data, reward or evaluation method, runtime, credentials, and experiment resources. It then helps the agent build and validate the harness. When you request optimization and reliable feedback is available, it uses the execution trajectories and rewards for reflection, then freezes the selected harness for reuse.
 
@@ -190,6 +204,7 @@ The package and imports retain the names `auto-jev` and `auto_jev`. Provider ada
 | [`examples/pokemon/`](examples/pokemon/) | Trusted battle adapter, seeded local engine bridge, harnesses, and interactive presentation |
 | [`examples/pokemon/sample/`](examples/pokemon/sample/) | Selected harness and the curated website archive, with provenance |
 | [`docs/`](docs/) | Task authoring, a recorded Jev call, comparison video, and website screenshots |
+| [`.claude-plugin/`](.claude-plugin/) | Claude Code plugin manifest and GitHub marketplace catalog |
 | [`skills/jev-harness/`](skills/jev-harness/) | Instructions for a coding agent authoring a task-specific harness |
 | [`website/`](website/) | Read-only demonstration and its deployment adapter |
 

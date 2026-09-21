@@ -133,7 +133,39 @@ Harness 负责构建 Jev 输入：任务相关的 `state`、具名的 `questions
 
 安装 [JevHarness 技能](skills/jev-harness/SKILL.md)，然后向 Codex 或 Claude Code 描述你的任务。你无需手写 Jev 的指令或判定标准。
 
-克隆仓库，再将技能安装到希望开展工作的项目中（将 `/path/to/your-project` 替换为一个已有目录）：
+**Claude Code：通过插件在线安装。** 在 Claude Code 会话中依次运行：
+
+```text
+/plugin marketplace add https://github.com/TianyuCodings/JevHarness.git
+/plugin install jev-harness@jevharness
+/reload-plugins
+```
+
+然后用插件中的技能描述你的任务：
+
+```text
+/jev-harness:jev-harness 构建一个将客服工单分配给正确团队的 harness。
+请先明确我的输入、合法动作、示例、成功标准和预算。
+如果有可靠的奖励，请加入评估与反思优化。
+```
+
+输入 `/plugin` 可以打开 Claude Code 的插件管理界面。在线安装会下载技能及其参考资料，无需手动复制。如果仓库为私有，你的 GitHub 账号需要读取权限，并且 Git 身份验证应已配置好。安装插件不会安装 Python 依赖，也不会配置模型密钥。
+
+**Codex：从 GitHub 在线安装技能。** 如果使用的 Codex 环境提供内置 `skill-installer`，发送：
+
+```text
+$skill-installer Install the jev-harness skill from https://github.com/TianyuCodings/JevHarness/tree/main/skills/jev-harness
+```
+
+安装完成后，可在下一轮对话中使用；如果未发现技能，再重启会话：
+
+```text
+$jev-harness 构建一个将客服工单分配给正确团队的 harness。
+请先明确我的输入、合法动作、示例、成功标准和预算。
+如果有可靠的奖励，请加入评估与反思优化。
+```
+
+**两个工具都适用的手动安装方式。** 克隆仓库，再将技能安装到希望开展工作的项目中（将 `/path/to/your-project` 替换为一个已有目录）：
 
 ```bash
 git clone https://github.com/TianyuCodings/JevHarness.git
@@ -147,25 +179,7 @@ python3 scripts/install-skill.py --target both --scope project --project /path/t
 python3 scripts/install-skill.py --target both --scope user
 ```
 
-个人安装位置为 `~/.agents/skills/jev-harness/` 和 `~/.claude/skills/jev-harness/`。如果技能没有出现，请重启智能体会话。安装器不会覆盖内容不同的已有安装，详见[安装指南](skills/jev-harness/references/installation.md)。
-
-在 **Codex** 中，用 `$jev-harness` 调用技能：
-
-```text
-$jev-harness 构建一个将客服工单分配给正确团队的 harness。
-JevHarness 仓库位于 /absolute/path/JevHarness。
-请先明确我的输入、合法动作、示例、成功标准和预算。
-如果有可靠的奖励，请加入评估与反思优化。
-```
-
-在 **Claude Code** 中，用 `/jev-harness` 加上同样的任务描述：
-
-```text
-/jev-harness 构建一个将客服工单分配给正确团队的 harness。
-JevHarness 仓库位于 /absolute/path/JevHarness。
-请先明确我的输入、合法动作、示例、成功标准和预算。
-如果有可靠的奖励，请加入评估与反思优化。
-```
+个人安装位置为 `~/.agents/skills/jev-harness/` 和 `~/.claude/skills/jev-harness/`。通过这种方式安装的是独立技能：在 Codex 中使用 `$jev-harness`，在 Claude Code 中使用 `/jev-harness`；Claude 插件的调用名则是 `/jev-harness:jev-harness`。如果技能没有出现，请重启智能体会话。安装器不会覆盖内容不同的已有安装；终端命令、更新和发现问题详见[安装指南](skills/jev-harness/references/installation.md)。
 
 技能会先充分了解任务、允许的观测与动作、可用数据、奖励或评估方式、运行环境、凭据和实验资源，再帮助智能体构建并验证 harness。当你要求优化且存在可靠反馈时，技能会利用执行轨迹与奖励开展反思，最后冻结选中的 harness，供后续复用。
 
@@ -190,6 +204,7 @@ Python 项目要求 Python 3.11+。执行 Python 代码的节点目前需要受�
 | [`examples/pokemon/`](examples/pokemon/) | 可信对战适配器、带随机种子的本地引擎桥接、harness 与交互展示 |
 | [`examples/pokemon/sample/`](examples/pokemon/sample/) | 选中的 harness 与整理后的网站存档，包含来源信息 |
 | [`docs/`](docs/) | 任务构建文档、真实 Jev 调用记录、对比视频与网站截图 |
+| [`.claude-plugin/`](.claude-plugin/) | Claude Code 插件清单与 GitHub 插件市场目录 |
 | [`skills/jev-harness/`](skills/jev-harness/) | 指导编程智能体构建任务专用 harness 的技能 |
 | [`website/`](website/) | 只读演示网站及其部署适配器 |
 

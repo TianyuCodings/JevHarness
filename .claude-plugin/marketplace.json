@@ -1,0 +1,18 @@
+{
+  "name": "jevharness",
+  "owner": {
+    "name": "TianyuCodings"
+  },
+  "metadata": {
+    "description": "JevHarness skills for LLM-authored decision workflows."
+  },
+  "plugins": [
+    {
+      "name": "jev-harness",
+      "source": "./",
+      "description": "Build, evaluate, and optionally evolve code and Jev decision pipelines.",
+      "category": "development",
+      "tags": ["jev", "harness", "reflection"]
+    }
+  ]
+}

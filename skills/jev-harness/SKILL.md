@@ -28,6 +28,8 @@ Before implementation, state a concise task contract with the known inputs, outp
 
 Read [references/integration.md](references/integration.md) before writing a pipeline or adapter. Locate the JevHarness checkout from the workspace or a user-supplied path; an installed copy of this skill is not the Python runtime. Verify `auto_jev` imports from the intended checkout and inspect its current signatures.
 
+For the Claude Code plugin, the bundled repository root is two directories above this `SKILL.md` file's directory. Verify that it contains `pyproject.toml` and `auto_jev/` before using it as a source reference; a standalone skill copy does not include these files. Treat the plugin cache as read-only. Reuse an existing writable JevHarness checkout for implementation, or obtain one in the authorized task workspace from `https://github.com/TianyuCodings/JevHarness.git` when needed. Do not require the user to find the plugin cache path. Keep dependencies, generated adapters, and experiment artifacts in the task workspace, and resolve missing repository access or runtime credentials before the dependent work.
+
 The repository currently exposes a reusable Python runtime and an evaluator callback for GEPA. Its existing command-line runners are domain examples; **do not invent a universal task CLI or a built-in `TaskAdapter` class**. Implement the new domain adapter and a small task runner using the real APIs when needed. Do not silently inherit cryptocurrency objectives, fees, datasets, Pokémon rules, pilot counts, or example model choices.
 
 ## Build the first pipeline

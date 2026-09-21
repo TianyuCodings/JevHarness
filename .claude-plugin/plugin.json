@@ -1,0 +1,11 @@
+{
+  "name": "jev-harness",
+  "version": "0.1.0",
+  "description": "Let an LLM build task-specific Jev harnesses, then optionally improve them with complete execution traces and rewards.",
+  "author": {
+    "name": "TianyuCodings"
+  },
+  "homepage": "https://github.com/TianyuCodings/JevHarness",
+  "repository": "https://github.com/TianyuCodings/JevHarness",
+  "keywords": ["jev", "harness", "skills", "reflection", "gepa"]
+}
