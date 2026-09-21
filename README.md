@@ -1,5 +1,7 @@
 # JevHarness
 
+**English | [简体中文](README.zh-CN.md)**
+
 **Let an LLM write a task-specific harness for Jev. Run it, inspect its decisions, and optionally improve it using rewards and complete execution traces.**
 
 A harness turns task observations into useful features, constructs Jev questions and criteria, and combines the structured answers into actions. The authoring LLM can change the code, questions, graph, and memory. Once the harness is fixed, execution uses that code and its Jev calls; it does not need the authoring LLM on every decision.
