@@ -1,5 +1,9 @@
 # JevHarness
 
+**Let an LLM write a task-specific harness for Jev. Run it, inspect its decisions, and optionally improve it using rewards and complete execution traces.**
+
+A harness turns task observations into useful features, constructs Jev questions and criteria, and combines the structured answers into actions. The authoring LLM can change the code, questions, graph, and memory. Once the harness is fixed, execution uses that code and its Jev calls; it does not need the authoring LLM on every decision.
+
 **Reason deeply during development. Freeze the strategy. Let Jev make fast, fuzzy decisions.**
 
 A strong LLM brings broad intelligence and deep reasoning, but generating that reasoning for every action adds latency and cost. Jev provides fast, lightweight judgment with more limited capacity for open-ended reasoning. JevHarness combines these strengths: let the LLM write a task-specific harness, then optionally improve it using rewards and complete execution traces.
