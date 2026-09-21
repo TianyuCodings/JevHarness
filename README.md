@@ -1,16 +1,18 @@
 # JevHarness
 
-**Let an LLM write a task-specific harness for Jev. Run it, inspect its decisions, and optionally improve it using rewards and complete execution traces.**
+**Reason deeply during development. Freeze the strategy. Let Jev make fast, fuzzy decisions.**
 
-A harness turns task observations into useful features, constructs Jev questions and criteria, and combines the structured answers into actions. The authoring LLM can change the code, questions, graph, and memory. Once the harness is fixed, execution uses that code and its Jev calls; it does not need the authoring LLM on every decision.
+A strong LLM brings broad intelligence and deep reasoning, but generating that reasoning for every action adds latency and cost. Jev provides fast, lightweight judgment with more limited capacity for open-ended reasoning. JevHarness combines these strengths: let the LLM write a task-specific harness, then optionally improve it using rewards and complete execution traces.
+
+The harness preserves the LLM's reasoning strategy in explicit code, features, state, instructions, criteria, and control flow. Code computes useful facts; Jev makes **fuzzy, context-sensitive decisions** from those facts. The authoring LLM can revise the harness and its memory during development. Once the selected harness is frozen, its code and Jev calls execute without the authoring LLM on every decision.
 
 **Pokémon result: after 5 reflection rounds, the selected harness improved Eval win rate from 25% (3/12) to 75% (9/12).** The search retained the round-3 candidate as its best harness; Eval was used for selection.
 
-[Open the interactive demo](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) · [How it works](#how-it-works) · [Install and use the skill](#build-your-own-task)
+[Open the interactive demo](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) · [How it works](#how-it-works) · [Latency](#latency) · [Install and use the skill](#build-your-own-task)
 
 [![Side-by-side replay: initial harness versus the selected evolved harness](docs/media/pokemon-comparison.gif)](docs/media/pokemon-comparison.mp4)
 
-**Initial vs. evolved:** the two harnesses play the same evaluation scenario. The initial harness loses; the selected harness wins. **Edited highlights: turn-2 decisions, then each battle’s ending.** [Watch the MP4](docs/media/pokemon-comparison.mp4) or [open the full battle archive](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) and expand the comparison.
+**Initial vs. evolved:** the two harnesses play the same evaluation scenario. The initial harness loses; the selected harness wins. **Edited highlights: turn-2 decisions, then each battle’s ending.** [Watch the MP4](docs/media/pokemon-comparison.mp4) or [open the full battle archive](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive).
 
 ## Start with the example
 
@@ -26,6 +28,20 @@ node website/preview.mjs --port 8768
 Open [localhost:8768](http://localhost:8768). The viewer needs Node.js and a modern browser; battle animations download assets from the official Pokémon Showdown renderer. The archived battle log stays in the browser and is not uploaded to a replay server. See [website setup](website/README.md) for deployment and archive verification.
 
 The reported improvement is an example result on the selection Eval set, not an independent estimate of performance on unseen games. The page shows Train/Eval only, distinguishes sampled training coverage, and includes rejected proposals.
+
+## Latency
+
+The selected Pokémon harness makes a full decision in **568 ms median**, with individual Jev requests taking **269 ms median**, in the archived Eval run.
+
+| Measurement | Median | P95 | Samples |
+| --- | ---: | ---: | ---: |
+| Initial harness: full decision | 678 ms | 1,495 ms | 238 decisions |
+| Selected harness: full decision | **568 ms** | **657 ms** | 113 decisions |
+| Selected harness: individual Jev request | **269 ms** | **348 ms** | 226 requests |
+
+These are recorded successful timings from 12 Eval games per harness, with every included Jev call explicitly marked as missing the local response cache. Full-decision time includes feature computation, parallel Jev calls, and final action selection; Jev request time includes client and network overhead. Parallel call durations overlap, so they should not be added together. Battle simulation and authoring/reflection time are outside the decision timing.
+
+The [archived measurements and methodology](https://jev-harness.tianyuchen99.chatgpt.site/api/latency?split=eval) include cache exclusions and per-node statistics. These observations are not a controlled speed comparison; this experiment did not benchmark an LLM making every runtime decision.
 
 ## How it works
 
