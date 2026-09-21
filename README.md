@@ -14,11 +14,23 @@ The harness preserves the LLM's reasoning strategy in explicit code, features, s
 
 **Pokémon result: after 5 reflection rounds, the selected harness improved Eval win rate from 25% (3/12) to 75% (9/12).** The search retained the round-3 candidate as its best harness; Eval was used for selection.
 
-[Open the interactive demo](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) · [How it works](#how-it-works) · [Latency](#latency) · [Install and use the skill](#build-your-own-task)
+[Open the interactive demo](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) · [How it works](#how-it-works) · [Latency](#latency) · [Install and use the skill](#install-in-claude-code)
 
 [![Side-by-side replay: initial harness versus the selected evolved harness](docs/media/pokemon-comparison.gif)](docs/media/pokemon-comparison.mp4)
 
 **Initial vs. evolved:** the two harnesses play the same evaluation scenario. The initial harness loses; the selected harness wins. **Edited highlights: turn-2 decisions, then each battle’s ending.** [Watch the MP4](docs/media/pokemon-comparison.mp4) or [open the full battle archive](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive).
+
+## Install in Claude Code
+
+Run these commands inside Claude Code:
+
+```text
+/plugin marketplace add https://github.com/TianyuCodings/JevHarness.git
+/plugin install jev-harness@jevharness
+/reload-plugins
+```
+
+See [skill usage, Codex installation, and manual options](#build-your-own-task).
 
 ## Start with the example
 
@@ -133,15 +145,7 @@ Here, the harness estimates that Slowbro loses the damage race and offers a swit
 
 Install the [JevHarness skill](skills/jev-harness/SKILL.md) and describe your task to Codex or Claude Code. You do not need to handwrite Jev instructions or criteria.
 
-**Claude Code: install online as a plugin.** Run these commands inside Claude Code:
-
-```text
-/plugin marketplace add https://github.com/TianyuCodings/JevHarness.git
-/plugin install jev-harness@jevharness
-/reload-plugins
-```
-
-Then invoke the plugin's skill with your task:
+**Claude Code.** [Install the plugin](#install-in-claude-code), then invoke its skill with your task:
 
 ```text
 /jev-harness:jev-harness Build a harness that routes support tickets to the right team.

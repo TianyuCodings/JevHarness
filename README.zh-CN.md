@@ -14,11 +14,23 @@ Harness 将 LLM 的推理策略固化为明确的代码、特征、状态、指�
 
 **宝可梦实验结果：经过 5 轮反思，选中的 harness 将 Eval 胜率从 25%（3/12）提高至 75%（9/12）。** 搜索最终保留第 3 轮的候选作为最佳 harness；Eval 用于候选选择。
 
-[打开交互演示](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) · [工作原理](#工作原理) · [延迟](#延迟) · [安装与使用技能](#构建自己的任务)
+[打开交互演示](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive) · [工作原理](#工作原理) · [延迟](#延迟) · [安装与使用技能](#在-claude-code-中安装)
 
 [![初始 harness 与选中进化版本的并排对战回放](docs/media/pokemon-comparison.gif)](docs/media/pokemon-comparison.mp4)
 
 **初始版与进化版对比：** 两个 harness 挑战同一个评估场景。初始版落败，选中的进化版获胜。**视频为剪辑片段：先展示第 2 回合决策，再跳转到各自的对战结局。** [观看 MP4](docs/media/pokemon-comparison.mp4)，或[打开完整对战存档](https://jev-harness.tianyuchen99.chatgpt.site/?autoplay=1#paired-archive)。
+
+## 在 Claude Code 中安装
+
+在 Claude Code 会话中依次运行：
+
+```text
+/plugin marketplace add https://github.com/TianyuCodings/JevHarness.git
+/plugin install jev-harness@jevharness
+/reload-plugins
+```
+
+技能调用示例、Codex 安装与手动安装方式见[构建自己的任务](#构建自己的任务)。
 
 ## 从示例开始
 
@@ -133,15 +145,7 @@ Harness 负责构建 Jev 输入：任务相关的 `state`、具名的 `questions
 
 安装 [JevHarness 技能](skills/jev-harness/SKILL.md)，然后向 Codex 或 Claude Code 描述你的任务。你无需手写 Jev 的指令或判定标准。
 
-**Claude Code：通过插件在线安装。** 在 Claude Code 会话中依次运行：
-
-```text
-/plugin marketplace add https://github.com/TianyuCodings/JevHarness.git
-/plugin install jev-harness@jevharness
-/reload-plugins
-```
-
-然后用插件中的技能描述你的任务：
+**Claude Code：** 按照上方的[安装步骤](#在-claude-code-中安装)安装插件后，用技能描述你的任务：
 
 ```text
 /jev-harness:jev-harness 构建一个将客服工单分配给正确团队的 harness。
