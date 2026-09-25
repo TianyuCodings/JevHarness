@@ -1,10 +1,11 @@
 import copy
-import fcntl, json, time, math
+import json, time, math
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 import httpx
 from .crypto import EpisodeExecutionError, _Book, _error_evidence, _parse_target, _run_evidence
+from .file_lock import flock
 from .data import fetch_coinbase, fetch_rss
 from .runtime import PipelineRuntime
 from .spec import spec_hash, validate_spec
@@ -205,5 +206,5 @@ def paper_step(artifact, jev, *, asset='BTC-USD', state_path='artifacts/paper.js
     path = Path(state_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path.parent / (path.name + '.lock'), 'w') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+        flock(lock)
         return _step(spec, jev, artifact['artifact_hash'], costs, asset, path, rss_url)

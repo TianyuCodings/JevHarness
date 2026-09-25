@@ -189,7 +189,7 @@ python3 scripts/install-skill.py --target both --scope user
 
 ## 运行环境与凭据
 
-Python 项目要求 Python 3.11+。执行 Python 代码的节点目前需要受支持的 macOS 原生沙箱；隔离不可用时会拒绝执行。v2 版本的表达式/Jev 流程不启动这些 Python 工作进程。存档网站既不需要沙箱，也不需要游戏引擎。
+Python 项目要求 Python 3.11+。在 Windows、Linux 与 macOS 上均可导入 `JevClient` 并运行 v2 表达式/Jev 流程；本地运行档案在各平台使用可移植的文件锁。执行 Python 代码的节点目前需要受支持的 macOS 原生沙箱；隔离不可用时会拒绝执行。v2 表达式/Jev 流程不会启动这些 Python 工作进程。存档网站既不需要沙箱，也不需要游戏引擎。
 
 | 用途 | 配置 |
 | --- | --- |

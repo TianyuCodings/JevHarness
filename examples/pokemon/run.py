@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import fcntl
 import hashlib
 import importlib.metadata
 import json
@@ -22,6 +21,7 @@ from dotenv import load_dotenv
 from auto_jev import evolution as evolution_module
 
 from auto_jev.evolution import run_evolution, freeze_run
+from auto_jev.file_lock import flock
 from auto_jev.frozen import build_task_contract, evaluate_frozen, source_hash, verify_task_contract
 from auto_jev.providers import JevClient, make_proposer
 from auto_jev.spec import spec_hash
@@ -98,7 +98,7 @@ def prepare(output, *, profile='pilot'):
     output.mkdir(parents=True, exist_ok=True)
     with (output / 'prepare.lock').open('a') as lock:
         try:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            flock(lock, non_blocking=True)
         except BlockingIOError:
             raise ValueError('This Pokemon experiment already has a preparation worker') from None
         return _prepare_inputs(output, profile=profile)
@@ -235,7 +235,7 @@ def run(output, *, rounds=2, resume=False, preflight_only=False, profile='pilot'
     rules = read_json(output / 'rules.json')
     with (output / 'experiment.lock').open('a') as lock:
         try:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            flock(lock, non_blocking=True)
         except BlockingIOError:
             raise ValueError('This Pokemon experiment already has a worker') from None
         state_path = output / 'state.json'
