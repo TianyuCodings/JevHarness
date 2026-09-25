@@ -189,7 +189,7 @@ The skill first gathers sufficient information about the task, allowed observati
 
 ## Runtime and credentials
 
-The Python project requires Python 3.11+. Functional Python nodes currently require a supported macOS native sandbox; unavailable isolation fails closed. Version 2 expression/Jev flows do not launch those Python workers. The archived website needs neither the sandbox nor a game engine.
+The Python project requires Python 3.11+. You can import `JevClient` and run version 2 expression/Jev flows on Windows, Linux, and macOS; local run storage uses portable file locking on each platform. Functional Python nodes currently require a supported macOS native sandbox; unavailable isolation fails closed. Those Python workers are not started by version 2 expression/Jev flows. The archived website needs neither the sandbox nor a game engine.
 
 | Purpose | Configuration |
 | --- | --- |

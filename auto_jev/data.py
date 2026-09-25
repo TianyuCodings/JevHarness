@@ -75,10 +75,10 @@ def fetch_rss(url):
 
 def append_received_news(path, records):
     """Append changed revisions; repeated polling preserves the first arrival time."""
-    import fcntl
+    from .file_lock import flock
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
     with path.open('a+') as stream:
-        fcntl.flock(stream,fcntl.LOCK_EX);stream.seek(0)
+        flock(stream);stream.seek(0)
         latest={}
         for line in stream:
             if line.strip():

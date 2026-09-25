@@ -1,6 +1,6 @@
 """Offline orchestration checks; all providers, battles and optimizers are fakes."""
 import copy
-import fcntl
+from auto_jev.file_lock import flock
 from collections import Counter
 from itertools import combinations
 from types import SimpleNamespace
@@ -331,7 +331,7 @@ def test_concurrent_preparation_cannot_rewrite_manifest(offline_runner):
     runner.prepare(env.output, profile='expanded')
     before = (env.output / 'manifest.json').read_bytes()
     with (env.output / 'prepare.lock').open('a') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        flock(lock, non_blocking=True)
         with pytest.raises(ValueError, match='preparation worker'):
             runner.prepare(env.output, profile='expanded')
     assert (env.output / 'manifest.json').read_bytes() == before
