@@ -4,7 +4,7 @@
 
 **Let an LLM write a task-specific harness for Jev. Run it, inspect its decisions, and optionally improve it using rewards and complete execution traces.**
 
-> **New paper: [System1-Arena: Which Decisions Can Be Left to System 1?](https://arxiv.org/abs/2610.21244)** — A benchmark of 268 decision sources and 138 closed-loop environments that compares fast System-1 models such as Jev with LLMs on accuracy, calibration and latency. [Leaderboard](https://tianyucodings.github.io/S1-Arena) · [Code](https://github.com/TianyuCodings/S1-Arena) · [Dataset](https://huggingface.co/datasets/C-Tianyu/S1-Arena)
+> **New paper: [System1-Arena: Which Decisions Can Be Left to System 1?](https://arxiv.org/abs/2610.21244)** — The most comprehensive benchmark for Jev-like models, including classification and agentic tasks. [Leaderboard](https://tianyucodings.github.io/S1-Arena) · [Code](https://github.com/TianyuCodings/S1-Arena) · [Dataset](https://huggingface.co/datasets/C-Tianyu/S1-Arena)
 
 A harness turns task observations into useful features, constructs Jev questions and criteria, and combines the structured answers into actions. The authoring LLM can change the code, questions, graph, and memory. Once the harness is fixed, execution uses that code and its Jev calls; it does not need the authoring LLM on every decision.
 

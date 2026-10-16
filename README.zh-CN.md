@@ -4,7 +4,7 @@
 
 **让 LLM 为 Jev 编写面向具体任务的 harness（任务执行框架）。运行它、查看它的决策，并按需利用奖励和完整执行轨迹进行改进。**
 
-> **新论文：[System1-Arena: Which Decisions Can Be Left to System 1?](https://arxiv.org/abs/2610.21244)** — 一个包含 268 个决策数据源和 138 个闭环环境的基准，在准确率、概率校准和延迟上比较 Jev 等快速 System-1 模型与 LLM。[排行榜](https://tianyucodings.github.io/S1-Arena) · [代码](https://github.com/TianyuCodings/S1-Arena) · [数据集](https://huggingface.co/datasets/C-Tianyu/S1-Arena)
+> **新论文：[System1-Arena: Which Decisions Can Be Left to System 1?](https://arxiv.org/abs/2610.21244)** — 目前最全面的 Jev 类模型基准，涵盖分类任务与智能体（agentic）任务。[排行榜](https://tianyucodings.github.io/S1-Arena) · [代码](https://github.com/TianyuCodings/S1-Arena) · [数据集](https://huggingface.co/datasets/C-Tianyu/S1-Arena)
 
 Harness 将任务观测转化为有用的特征，构建 Jev 问题与判定标准，再将结构化回答组合为动作。负责构建的 LLM 可以修改代码、问题、流程图与记忆。Harness 固定后，执行依靠这些代码及其 Jev 调用，无需让构建它的 LLM 参与每次决策。
 
