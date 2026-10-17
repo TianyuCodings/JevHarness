@@ -13,7 +13,6 @@
 from __future__ import annotations
 
 import dataclasses
-import fcntl
 import hashlib
 import json
 import math
@@ -24,6 +23,8 @@ import time
 import uuid
 from pathlib import Path
 from typing import Any
+
+from .file_lock import flock
 
 RUN_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_\-]{0,79}$")
 HASH_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_\-]{5,79}$")
@@ -381,7 +382,7 @@ class RunStore:
         path = self._trace_path(run_id, split, cand_hash, episode_id)
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.with_suffix('.write.lock').open('a+b') as lock:
-            fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+            flock(lock)
             self._save_indexed_trace(path, payload)
 
     def _save_indexed_trace(self, path: Path, payload: dict) -> None:

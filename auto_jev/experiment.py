@@ -1,5 +1,4 @@
 """Durable research workflow: evolution, freeze, then sealed test evaluation."""
-import fcntl
 import hashlib
 import importlib.metadata
 import json
@@ -10,6 +9,7 @@ import uuid
 from collections import defaultdict
 from pathlib import Path
 
+from .file_lock import flock
 from .storage import RunStore, StoreError, atomic_write_json, now_iso
 
 
@@ -64,7 +64,7 @@ def run_experiment(config_path, *, resume=False):
     output.mkdir(parents=True, exist_ok=True)
     with (output / 'experiment.lock').open('a') as lock:
         try:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            flock(lock, non_blocking=True)
         except BlockingIOError:
             raise ValueError('This experiment already has an active worker') from None
         path = output / 'state.json'
